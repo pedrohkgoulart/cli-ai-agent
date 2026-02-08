@@ -10,13 +10,20 @@ To get started and install required packages run the following command:
 npm install
 ```
 
-After packages are installed, you will need to grant execute permission to the main executable in this repo `index.js`
+After packages are installed, you will need to setup the evironment variables. Run the following command to copy the example env file and then update the `GEMINI_API_KEY` variable.
+
+```
+cp config/.env.example config/.env
+# then open config/.env and update the values
+```
+
+Lastly, you will need to grant execute permission to the main executable in this repo `index.js`:
 
 ```
 chmod +x index.js
 ```
 
-You will then be able to initialize the CLI AI Agent with the following command 
+You should now be able to initialize the CLI AI Agent with the following command:
 
 ```
 cli-ai-agent
