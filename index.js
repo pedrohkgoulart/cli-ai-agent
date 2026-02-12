@@ -1,11 +1,14 @@
 #!/usr/bin/env node
-import inquirer from 'inquirer';
 import chalk from 'chalk';
+import dotenv from 'dotenv';
+import inquirer from 'inquirer';
 import ora from 'ora';
 
 import { getModelChatSession } from './helpers/getModelChatSession.js';
 import { getMessages } from './helpers/getMessages.js';
 import { executeTools } from './data/tools.js';
+
+dotenv.config({ path: 'config/.env' });
 
 const chatSession = getModelChatSession();
 

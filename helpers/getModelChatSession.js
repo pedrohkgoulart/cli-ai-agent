@@ -1,12 +1,9 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import chalk from 'chalk';
-import dotenv from 'dotenv';
 
 import { tools } from '../data/tools.js';
 
 export const getModelChatSession = () => {
-    dotenv.config({ path: 'config/.env' });
-
     const apiKey = process.env.GEMINI_API_KEY;
     const modelName = process.env.GEMINI_MODEL;
 
