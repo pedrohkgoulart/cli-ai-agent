@@ -2,6 +2,8 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import chalk from 'chalk';
 import dotenv from 'dotenv';
 
+import { tools } from '../data/tools.js';
+
 export const getModelChatSession = () => {
     dotenv.config({ path: 'config/.env' });
 
@@ -19,7 +21,7 @@ export const getModelChatSession = () => {
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: modelName });
+    const model = genAI.getGenerativeModel({ model: modelName, tools: [tools] });
     const chatSession = model.startChat({ history: [] });
 
     return chatSession;

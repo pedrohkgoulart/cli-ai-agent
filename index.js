@@ -5,11 +5,14 @@ import ora from 'ora';
 
 import { getModelChatSession } from './helpers/getModelChatSession.js';
 import { getMessages } from './helpers/getMessages.js';
+import { executeTools } from './data/tools.js';
 
 const chatSession = getModelChatSession();
 
 // Main chat loop
 async function chatLoop() {    
+    let response;
+
     console.log(getMessages("greeting"));
 
     while (true) {
@@ -30,7 +33,24 @@ async function chatLoop() {
 
         try {
             const result = await chatSession.sendMessage(prompt);
-            const response = result.response.text();
+
+            const call = result.response.functionCalls()?.[0];
+
+            if (call) {
+                const { name, args } = call;
+                const tool = executeTools[name];
+
+                if (tool) {
+                    tool(args);
+
+                    const toolResponse = await chatSession.sendMessage([{
+                        functionResponse: { name, response: { result: "success" }}
+                    }]);
+                    response = toolResponse.response.text();
+                }
+            } else {
+                response = result.response.text();
+            }
             
             spinner.stop();
             console.log(chalk.cyan('Agent:'), response + '\n');
