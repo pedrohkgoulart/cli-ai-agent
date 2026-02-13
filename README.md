@@ -45,15 +45,33 @@ cli-ai-agent
 
 ### Updating the Gemini model
 
-The app is setup by default to use the 'gemini-2.0-flash-lite' model. You can customize this by updating the `GEMINI_MODEL` env variable. View https://ai.google.dev/gemini-api/docs/models for more information on available models.
+The app is setup by default to use the 'gemini-2.5-flash-lite' model. You can customize this by updating the `GEMINI_MODEL` env variable. View https://ai.google.dev/gemini-api/docs/models for more information on available models.
 
 # Tools
 
 This app passes tool definitions to the model, which are similar to skill definitions. Tools are defined in the `data/tools.js` file. This is an overview of the available tools on this app.
 
+**Note:** The agent has access to the file system within the current working directory only. It cannot access files outside of this directory. This is a security measure to prevent unauthorized access to sensitive files.
+
 ### writeFile
 
-This allows the agent to create or update a file within the current working directory. You cannot write or update files within system folders. It is important to note that this limitation was put in place to mitigate potential risky file updates.
+This allows the agent to create or update a file within the current working directory. The agent can write any content to a file, including code, text, or data.
+
+### readFile
+
+This allows the agent to read the content of a file within the current working directory. The agent will return the content of the file as a string.
+
+### removeFile
+
+This allows the agent to delete a file within the current working directory.
+
+### searchFiles
+
+This allows the agent to search for files within the current working directory. The agent will return a list of file names that match the query.
+
+### runScript
+
+This allows the agent to run a script or command in the terminal. The agent can use this tool to execute code, run tests, or perform any command line operation. For security reasons, the agent can only run commands that are in the allowed list defined in `data/tools.js`. You can customize this list by updating the `ALLOWED_COMMANDS` array in the same file.
 
 # Example usage
 
