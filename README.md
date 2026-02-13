@@ -79,7 +79,7 @@ This allows the agent to search for files within the current working directory. 
 
 ### runScript
 
-This allows the agent to run a script or command in the terminal. The agent can use this tool to execute code, run tests, or perform any command line operation. For security reasons, the agent can only run commands that are in the allowed list defined in `data/tools.js`. You can customize this list by updating the `ALLOWED_COMMANDS` array in the same file.
+This allows the agent to run a script or command in the terminal. The agent can use this tool to execute code, run tests, or perform any command line operation. For security reasons, there is a list of `PROHIBITED_COMMANDS` that the agent cannot run in `data/tools.js`. You can customize this list by updating the array.
 
 # Examples
 ### Simple code generation

@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { promisify } from 'util';
 
-const ALLOWED_COMMANDS = ['ls', 'cat', 'grep', 'find', 'pwd', 'echo', 'node', 'npm', 'git', 'curl', 'mkdir', 'rm', 'cp', 'mv'];
+const PROHIBITED_COMMANDS = ['alias', 'rm', 'chmod', ':()', 'command', 'mkfs', 'dd', 'do', 'for', 'tar', 'chown', 'fsck'];
 const PROTECTED_DIRECTORIES = ['/etc', '/sys', '/proc', '/var', '/bin', '/sbin', '/usr'];
 
 const execPromise = promisify(exec);
@@ -108,10 +108,9 @@ const searchFiles = (args) => {
  */
 const runScript = async (args) => {
   const command = args.command.trim();
-  const firstWord = command.split(/\s+/)[0];
 
-  if (!ALLOWED_COMMANDS.includes(firstWord)) {
-    throw new Error(`Command not allowed: ${firstWord}`);
+  if (PROHIBITED_COMMANDS.some(cmd => command.split(' ')[0] === cmd)) {
+    throw new Error(`Command not allowed: ${command}`);
   }
 
   try {
