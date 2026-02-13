@@ -47,17 +47,21 @@ export async function chatLoop(chatSession) {
                 let confirm = skippedConfirmationForTools.has(name);
 
                 if (!confirm) {
+                    spinner.stop();
+                    
+                    console.log(chalk.yellow(`\nThe agent wants to ${toolDescription(args)}`));
+                    
                     const answers = await inquirer.prompt([
                         {
                             type: 'confirm',
                             name: 'confirm',
-                            message: chalk.yellow(`The agent wants to execute the following action:\n - ${toolDescription(args)}\nDo you want to proceed?`),
+                            message: chalk.white(`Do you want to proceed?`),
                             default: false,
                         },
                         {
                             type: 'confirm',
                             name: 'skipFuture',
-                            message: chalk.gray('Skip this confirmation for this tool in the future?'),
+                            message: chalk.white('Skip this confirmation for this tool in this session?'),
                             default: false,
                             when: (answers) => answers.confirm,
                         },
@@ -68,11 +72,12 @@ export async function chatLoop(chatSession) {
                     if (answers.skipFuture) {
                         skippedConfirmationForTools.add(name);
                     }
+                    spinner.start();
                 }
 
                 if (confirm) {
-                    await tool(args);
-
+                    const toolResult = await tool(args);
+                    
                     const toolResponse = await chatSession.sendMessage([{
                         functionResponse: { name, response: { result: "success" }}
                     }]);

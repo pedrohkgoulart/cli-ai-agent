@@ -34,7 +34,7 @@ const writeFile = (args) => {
     const targetPath = path.resolve(args.path);
     validatePath(targetPath);
     
-    fs.writeFileSync(targetPath, args.content);
+    return fs.writeFileSync(targetPath, args.content);
 }
 
 /**
@@ -64,7 +64,7 @@ const removeFile = (args) => {
     const targetPath = path.resolve(args.path);
     validatePath(targetPath);
 
-    fs.unlinkSync(targetPath);
+    return fs.unlinkSync(targetPath);
 }
 
 /**
@@ -106,12 +106,10 @@ const searchFiles = (args) => {
  * 
  * @returns {Promise<string>} The output of the command.
  */
-async function runScript(command) {
-  if (typeof command !== 'string' || command.trim() === '') {
-      throw new Error('Invalid command');
-  }
+const runScript = async (args) => {
+  const command = args.command.trim();
+  const firstWord = command.split(/\s+/)[0];
 
-  const firstWord = command.trim().split(/\s+/)[0];
   if (!ALLOWED_COMMANDS.includes(firstWord)) {
     throw new Error(`Command not allowed: ${firstWord}`);
   }
@@ -186,11 +184,11 @@ export const tools = {
 };
 
 export const toolDescriptions = {
-    'writeFile': (args) => `Create or update a file at path ${args.path}.`,
-    'readFile': (args) => `Read the content of a file at path ${args.path}.`,
-    'removeFile': (args) => `Delete the file at path ${args.path}.`,
-    'searchFiles': (args) => `Search for files with the name ${args.fileName} within this directory.`,
-    'runScript': (args) => `Execute the shell command: ${args.command}.`
+    'writeFile': (args) => `create or update a file at path ${args.path}`,
+    'readFile': (args) => `read the content of a file at path ${args.path}`,
+    'removeFile': (args) => `delete the file at path ${args.path}`,
+    'searchFiles': (args) => `search for files with the name ${args.fileName} within this directory`,
+    'runScript': (args) => `execute the shell command "${args.command}"`
 }
 
 export const executeTools = {

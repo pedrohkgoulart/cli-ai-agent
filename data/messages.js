@@ -36,7 +36,7 @@ export const messages = {
 }
 
 export const getFormattedMessage = {
-    'greeting': (message) => chalk.blue.bold(`\n${message}\n`) + chalk.gray('Type "exit" to quit.\n'),
+    'greeting': (message) => chalk.blue.bold(`\nUsing model ${process.env.GEMINI_MODEL}\n`) + chalk.blue.bold(`\n${message}\n`) + chalk.gray('Type "exit" to quit.\n'),
     'loading': (message) => chalk.yellow(message),
     'failure': (message) => chalk.bgRed(message),
     'farewell': (message) => chalk.yellow(message)
