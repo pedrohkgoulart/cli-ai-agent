@@ -3,9 +3,11 @@ import inquirer from 'inquirer';
 import ora from 'ora';
 
 import { getMessages } from './helpers/getMessages.js';
+import { getModelChatSession } from './helpers/getModelChatSession.js';
 import { executeTools, toolDescriptions } from './data/tools.js';
 
-export async function chatLoop(chatSession) {
+export async function chatLoop() {
+    const chatSession = getModelChatSession();
     const skippedConfirmationForTools = new Set();
 
     console.log(getMessages("greeting"));
@@ -79,9 +81,9 @@ export async function chatLoop(chatSession) {
                     const toolResult = await tool(args);
                     
                     const toolResponse = await chatSession.sendMessage([{
-                        functionResponse: { name, response: { result: "success" }}
+                        functionResponse: { name, response: { result: toolResult }}
                     }]);
-                    response = toolResponse.response.text();
+                    response = await toolResponse.response.text();
                 } else {
                     response = chalk.red('Action cancelled by user.');
                 }

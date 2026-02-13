@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { promisify } from 'util';
 
-const ALLOWED_COMMANDS = ['ls', 'cat', 'grep', 'find', 'pwd', 'echo', 'node', 'npm'];
+const ALLOWED_COMMANDS = ['ls', 'cat', 'grep', 'find', 'pwd', 'echo', 'node', 'npm', 'git', 'curl', 'mkdir', 'rm', 'cp', 'mv'];
 const PROTECTED_DIRECTORIES = ['/etc', '/sys', '/proc', '/var', '/bin', '/sbin', '/usr'];
 
 const execPromise = promisify(exec);

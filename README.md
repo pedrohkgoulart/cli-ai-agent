@@ -27,15 +27,15 @@ cp config/.env.example config/.env
 
 ### Grant permissions
 
-You will need to grant execute permission to the main executable in this repo `index.js`:
+You will need to grant execute permission to the main executable in this repo `index.cjs`:
 
 ```
-chmod +x index.js
+chmod +x index.cjs
 ```
 
 ### All done!
 
-You should now be able to initialize the CLI AI Agent with the following command:
+You should now be able to initialize the CLI AI Agent in any directory with the following command:
 
 ```
 cli-ai-agent
@@ -46,6 +46,14 @@ cli-ai-agent
 ### Updating the Gemini model
 
 The app is setup by default to use the 'gemini-2.5-flash-lite' model. You can customize this by updating the `GEMINI_MODEL` env variable. View https://ai.google.dev/gemini-api/docs/models for more information on available models.
+
+### Running lint
+
+You can run the following command to check for linting errors:
+
+```
+npm run lint
+```
 
 # Tools
 
@@ -73,7 +81,8 @@ This allows the agent to search for files within the current working directory. 
 
 This allows the agent to run a script or command in the terminal. The agent can use this tool to execute code, run tests, or perform any command line operation. For security reasons, the agent can only run commands that are in the allowed list defined in `data/tools.js`. You can customize this list by updating the `ALLOWED_COMMANDS` array in the same file.
 
-# Example usage
+# Examples
+### Simple code generation
 
 Call the CLI agent by running `cli-ai-agent` on the terminal. Type in your query, such as "Create a simple calculator app." 
 
@@ -82,3 +91,7 @@ Call the CLI agent by running `cli-ai-agent` on the terminal. Type in your query
 The resulting code from this command is added below. It was saved to `./calculator.py` on this example.
 
 ![Example code results generated from the query "create a simple calculator app"](./assets/example-code.png)
+
+### More complex application
+
+TODO

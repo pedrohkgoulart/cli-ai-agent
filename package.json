@@ -1,9 +1,8 @@
 {
   "name": "cli-ai-agent",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.cjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .js --fix"
   },
   "keywords": [],
@@ -11,13 +10,12 @@
   "license": "ISC",
   "description": "",
   "bin": {
-    "cli-ai-agent": "./index.js"
+    "cli-ai-agent": "./index.cjs"
   },
   "type": "module",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "chalk": "^5.6.2",
-    "dotenv": "^17.2.4",
     "inquirer": "^13.2.2",
     "ora": "^9.3.0"
   },
