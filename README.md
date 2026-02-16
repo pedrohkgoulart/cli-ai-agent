@@ -100,3 +100,4 @@ For more complex applications you might find it useful to create a txt file with
 
 The resulting application, after multiple interactions with the agent, is a React app that fetches weather data from an API and displays it. The agent created separate components and implemented simple styling for the app.
 
+https://github.com/user-attachments/assets/f112d15d-1879-400e-bbd6-23fee8469e5a
