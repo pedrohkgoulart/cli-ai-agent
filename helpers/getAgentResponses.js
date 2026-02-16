@@ -62,10 +62,10 @@ export async function getAgentResponses(result, skippedConfirmationForTools, spi
             }
         }
         
+        spinner.start();
         const toolResult = await tool(args);
 
         functionResponses.push({ functionResponse: { name, response: { result: toolResult } } });
-        spinner.start();
     }
 
     return functionResponses;

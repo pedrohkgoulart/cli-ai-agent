@@ -86,12 +86,17 @@ This allows the agent to run a script or command in the terminal. The agent can 
 
 Call the CLI agent by running `cli-ai-agent` on the terminal. Type in your query, such as "Create a simple calculator app." 
 
-![Example run of the app with the query "create a simple calculator app"](./assets/example-query.png)
+![Example run of the app with the query "create a simple calculator app"](./assets/simple-example-query.png)
 
 The resulting code from this command is added below. It was saved to `./calculator.py` on this example.
 
-![Example code results generated from the query "create a simple calculator app"](./assets/example-code.png)
+![Example code results generated from the query "create a simple calculator app"](./assets/simple-example-code.png)
 
 ### More complex application
 
-TODO
+For more complex applications you might find it useful to create a txt file with the instructions and ask the agent to execute the instructions in the file. For this example we requested the agent to create a React app that is able to read a weather API and display data. 
+
+![Example run of the app with the query "Use the instructions in weather_app_instructions.txt to create a React app"](./assets/complex-example-query.png)
+
+The resulting application, after multiple interactions with the agent, is a React app that fetches weather data from an API and displays it. The agent created separate components and implemented simple styling for the app.
+
